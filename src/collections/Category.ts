@@ -7,9 +7,22 @@ const Category: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      label: 'Name',
+      name: 'category',
+      type: 'radio',
+      options: [
+          {
+              label: 'Urgent',
+              value: 'urgent',
+          },
+          {
+              label: 'Not Urgent',
+              value: 'not_urgent',
+          },
+      ],
+      defaultValue: 'not_urgent',
+      admin: {
+          layout: 'horizontal',
+      },
     },
   ],
 }
