@@ -5,6 +5,9 @@ const Todo: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'title',
@@ -35,7 +38,7 @@ const Todo: CollectionConfig = {
           displayFormat: 'h:mm a',
         },
       },
-    },    
+    },
     {
       name: 'category',
       type: 'relationship',
@@ -44,24 +47,23 @@ const Todo: CollectionConfig = {
     },
     {
       name: 'status',
-      type: 'radio', 
+      type: 'radio',
       options: [
-          {
-              label: 'Not Yet',
-              value: 'not_yet',
-          },
-          {
-              label: 'Done',
-              value: 'done',
-          },
+        {
+          label: 'Not Yet',
+          value: 'not_yet',
+        },
+        {
+          label: 'Done',
+          value: 'done',
+        },
       ],
       defaultValue: 'not_yet',
       admin: {
-          layout: 'horizontal',
+        layout: 'horizontal',
       },
     },
   ],
-  
 };
 
 export default Todo;

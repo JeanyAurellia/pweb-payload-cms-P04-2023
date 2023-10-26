@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types'
+import { CollectionConfig } from 'payload/types';
 
 const Category: CollectionConfig = {
   slug: 'categories',
@@ -7,24 +7,11 @@ const Category: CollectionConfig = {
   },
   fields: [
     {
-      name: 'category',
-      type: 'radio',
-      options: [
-          {
-              label: 'Urgent',
-              value: 'urgent',
-          },
-          {
-              label: 'Not Urgent',
-              value: 'not_urgent',
-          },
-      ],
-      defaultValue: 'not_urgent',
-      admin: {
-          layout: 'horizontal',
-      },
+      name: 'name',
+      type: 'text',
+      label: 'Category Name',
     },
   ],
-}
+};
 
-export default Category
+export default Category;
