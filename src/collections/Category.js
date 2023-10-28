@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types';
+/** @type {import('payload/types').CollectionConfig} */
 
-const Category: CollectionConfig = {
+const Category = {
   slug: 'categories',
   admin: {
     useAsTitle: 'name',
@@ -12,6 +12,6 @@ const Category: CollectionConfig = {
       label: 'Category Name',
     },
   ],
-};
+}
 
-export default Category;
+export default Category
