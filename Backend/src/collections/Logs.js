@@ -21,7 +21,7 @@ const Logs = {
         required : true,
       },
       {
-        name: 'Activity',
+        name: 'Action',
         type: 'text',
         required: true,
       }
