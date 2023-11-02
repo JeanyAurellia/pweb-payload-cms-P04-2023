@@ -2,7 +2,7 @@ import payload from 'payload';
 /** @type {import('payload/types').CollectionConfig} */
 
 const Category = {
-  slug: 'categories',
+  slug: 'Category',
   admin: {
     useAsTitle: 'name',
   },

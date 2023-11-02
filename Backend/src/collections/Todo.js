@@ -62,11 +62,6 @@ const Todo = {
       label: 'Title',
     },
     {
-      name: 'description',
-      type: 'textarea',
-      label: 'Description',
-    },
-    {
       name: 'deadlineDate',
       type: 'date',
       admin: {
@@ -80,25 +75,7 @@ const Todo = {
       name: 'category',
       type: 'relationship',
       label: 'Category',
-      relationTo: 'categories',
-    },
-    {
-      name: 'status',
-      type: 'radio',
-      options: [
-        {
-          label: 'Not Yet',
-          value: 'not_yet',
-        },
-        {
-          label: 'Done',
-          value: 'done',
-        },
-      ],
-      defaultValue: 'not_yet',
-      admin: {
-        layout: 'horizontal',
-      },
+      relationTo: 'Category',
     },
   ],
 };

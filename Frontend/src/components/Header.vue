@@ -9,7 +9,6 @@ export default {
   },
   data() {
     return {
-      taskStore,
       isModal: false,
     };
   },

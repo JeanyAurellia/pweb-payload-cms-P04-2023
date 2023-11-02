@@ -12,6 +12,8 @@ import Category from './collections/Category'
 import Logs from './collections/Logs'
 
 export default buildConfig({
+  cors: ['http://localhost:5173'],
+  csrf: ['http://localhost:5173'],
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),

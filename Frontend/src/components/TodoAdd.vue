@@ -1,88 +1,77 @@
-<script>
+<template>
+  <span class="text-black font-bold text-2xl">Create Task</span>
+  <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-1">
+      <label class="text-black font-bold">Name</label>
+      <div class="border-2 py-1 border-gray-400 rounded-md p-2">
+        <input v-model="name">
+      </div>
+    </div>
+    <div class="flex flex-col gap-1">
+      <label class="text-black font-semibold">Category</label>
+      <select v-model="inputCategory" class="border-2 py-1 border-gray-400 rounded-md">
+        <option value="">Select a category</option>
+        <option v-for="category in categories" :value="category.id" :key="category">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <button
+    @click="createTask"
+    class="px-4 py-2 mt-1 bg-gray-700 w-fit h-fit text-gray-100 font-bold text-sm rounded-xl hover:scale-110 transition-all hover:ease-in-out hover:duration-300"
+  >
+    Submit
+  </button>
+</template>
 
+<script>
 export default {
   emits: ["close-modal"],
   data() {
     return {
-      taskStore,
-      inputTask: "",
-      inputKategori:"",
-      kategori:[],
-      inputDeadline: "",
+      name: "",
+      inputCategory: "",
+      categories: [],
     };
   },
   methods: {
-    async addTask (){
-      try {
-        const req = await fetch('http://localhost:3000/api/todos',{
-          method: "POST",
-          headers: {
-            "Content-Type":"application/json",
-          },
-          body: JSON.stringify({
-            inputTask: this.inputTask,
-            inputKategori: this.inputKategori,
-            inputDeadline: this.inputDeadline,
-          }),
+    async createTask() {
+        try {
+        const req = await fetch('http://localhost:3000/api/todos', {
+            method: "POST", 
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: this.name,
+                Category: this.inputCategory,
+            }),
         })
         const data = await req.json()
-          if (data){
-            window.alert('Todo telah terbuat');
+            if (data) {
+            window.alert('Task has been created successfully');
             window.location.reload();
-          }
-      } catch (err){
-        console.log (err)
+            }
+        } catch (err) {
+        console.log(err)
+        }
+      },
+      async getCategories() {
+        await fetch('http://localhost:3000/api/Category')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data.docs);
+            this.categories = data.docs;
+        })
+        .catch((error) => {
+            console.error(error)
+        })
       }
     },
-    async addKategori(){
-      await fetch('http://localhost:3000/api/categories')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.docs);
-        this.kategori = data.docs;
-      })
-      .catch((error) => {
-        console.error(error)
-      });
+    mounted() {
+        this.getCategories()
+        document.title = "Create Task"; 
     }
-  },
-  mounted(){
-    this.getKategori()
-    document.title = "Add Event";
-  }
 };
 </script>
-
-<template>
-  <span class="text-black font-bold text-2xl">Tambahkan Tugas Baru</span>
-  <div class="flex flex-col gap-3">
-    <div class="flex flex-col gap-1">
-      <label class="text-black font-bold">To Do</label>
-      <input
-        v-model="inputTask"
-        class="border-2 py-1 border-gray-400 rounded-lg text-center"
-      />
-    </div>
-    <div class="flex flex-col gap-1">
-      <label class="text-black font-bold">Kategori</label>
-      <input
-        v-model="inputKategori"
-        class="border-2 py-1 border-gray-400 rounded-lg text-center"
-      />
-    </div>
-    <div class="flex flex-col gap-1">
-      <label class="text-black font-bold">Deadline</label>
-      <input
-        v-model="inputDeadline"
-        type="date"
-        class="border-2 py-1 border-gray-400 rounded-lg text-center"
-      />
-    </div>
-  </div>
-  <button
-    @click="addTask"
-    class="px-4 py-2 mt-1 bg-rose-400 w-fit h-fit text-gray-100 font-bold text-sm rounded-xl hover:scale-110 transition-all hover:ease-in-out hover:duration-300"
-  >
-    Buat
-  </button>
-</template>
